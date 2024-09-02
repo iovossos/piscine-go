@@ -1,3 +1,3 @@
 $ bash hello.sh
-Hello ivossos!
+Hello ivossos
 $
