@@ -6,9 +6,12 @@ if [ -z "$HERO_ID" ]; then
     exit 1
 fi
 
-# Ensure HERO_ID is treated as a number
-# Convert HERO_ID to an integer to ensure correct type
-HERO_ID_INT=$(printf "%d" "$HERO_ID")
+# Convert HERO_ID to integer (if needed) and check if it's a valid number
+HERO_ID_INT=$(printf '%d' "$HERO_ID" 2>/dev/null)
+if [ $? -ne 0 ]; then
+    echo "Error: HERO_ID must be a valid integer."
+    exit 1
+fi
 
 # Fetch the JSON data
 json_data=$(curl -s https://platform.zone01.gr/assets/superhero/all.json)
@@ -21,8 +24,8 @@ fi
 
 # Extract the family information from the connections tab for the given HERO_ID
 family_info=$(echo "$json_data" | jq -r --argjson id "$HERO_ID_INT" '
-  .[] | select(.id == $id) | .connections.relatives
-')
+  .[] | select(.id == $id) | .connections.relatives | @json
+' | tr -d '\n')
 
 # Check if the HERO_ID was found and has relatives data
 if [ -z "$family_info" ]; then
@@ -30,12 +33,5 @@ if [ -z "$family_info" ]; then
     exit 1
 fi
 
-# Manually format the output to match the desired result
-# Assuming the pattern: separate by '\n' where you wish to create new lines
-formatted_family_info=$(echo "$family_info" | sed 's/),/\n/g')
-
-# Remove any extra leading/trailing whitespace and make sure the output is a single line
-formatted_family_info=$(echo "$formatted_family_info" | sed 's/^[ \t]*//;s/[ \t]*$//')
-
-# Display the formatted family information
-echo "$formatted_family_info"
+# Display the family information
+echo "$family_info"
