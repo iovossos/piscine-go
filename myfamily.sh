@@ -30,4 +30,4 @@ if [ -z "$family_info" ]; then
 fi
 
 # Display the family information
-echo "$family_info"
+printf "\"%s\"\n" "$family_info"
