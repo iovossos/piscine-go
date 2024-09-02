@@ -1,6 +1,7 @@
 #!/bin/bash
 
-# Find all .sh files, remove the .sh extension and the leading ./, sort them in descending order, and print the result
+# Find all .sh files, remove the directory path, remove the .sh extension, sort them in descending order, and print the result
 find . -type f -name "*.sh" | \
-    sed -e 's/^\.\///' -e 's/\.sh$//' | \
+    xargs -n 1 basename | \
+    sed 's/\.sh$//' | \
     sort -r
