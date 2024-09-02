@@ -29,5 +29,5 @@ if [ -z "$family_info" ]; then
     exit 1
 fi
 
-# Display the family information
-printf "\"%s\"\n" "$family_info"
+# Display the family information without extra quotes
+echo "$family_info"
