@@ -1,4 +1,4 @@
 find . -maxdepth 1 ! -name '.*' ! -name '.' ! -name '..' -printf '%T@ %p\n' | \
 sort -n | \
-awk '{if (S[$2]++ == 0) {if (match($2, /\/$/)) {print $2} else {print $2 "/"} }}' | \
+awk '{if (S[$2]++ == 0) {if (match($2, /\/$/)) {print substr($2, 3)} else {print substr($2, 3) "/"} }}' | \
 paste -sd, -
