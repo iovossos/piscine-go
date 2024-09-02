@@ -7,6 +7,7 @@ if [ -z "$HERO_ID" ]; then
 fi
 
 # Ensure HERO_ID is treated as a number
+# Convert HERO_ID to an integer to ensure correct type
 HERO_ID_INT=$(printf "%d" "$HERO_ID")
 
 # Fetch the JSON data
@@ -18,11 +19,8 @@ if [ $? -ne 0 ]; then
     exit 1
 fi
 
-# Convert JSON data to a single-line string
-json_data_single_line=$(echo "$json_data" | tr -d '\n')
-
 # Extract the family information from the connections tab for the given HERO_ID
-family_info=$(echo "$json_data_single_line" | jq -r --argjson id "$HERO_ID_INT" '
+family_info=$(echo "$json_data" | jq -r --argjson id "$HERO_ID_INT" '
   .[] | select(.id == $id) | .connections.relatives
 ')
 
@@ -32,8 +30,8 @@ if [ -z "$family_info" ]; then
     exit 1
 fi
 
-# Remove any leading and trailing quotes from the output
-family_info_clean=$(echo "$family_info" | sed 's/^"\(.*\)"$/\1/')
+# Replace newlines with a placeholder (e.g., \n) and display the family information
+family_info_escaped=$(echo "$family_info" | sed ':a;N;$!ba;s/\n/\\n/g')
 
-# Output the data without extra quotes, preserving formatting
-printf "%s\n" "$family_info_clean"
+# Display the family information without extra quotes
+echo "$family_info_escaped"
