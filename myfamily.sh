@@ -6,12 +6,8 @@ if [ -z "$HERO_ID" ]; then
     exit 1
 fi
 
-# Convert HERO_ID to integer (if needed) and check if it's a valid number
-HERO_ID_INT=$(printf '%d' "$HERO_ID" 2>/dev/null)
-if [ $? -ne 0 ]; then
-    echo "Error: HERO_ID must be a valid integer."
-    exit 1
-fi
+# Ensure HERO_ID is treated as a number
+HERO_ID_INT=$(printf "%d" "$HERO_ID")
 
 # Fetch the JSON data
 json_data=$(curl -s https://platform.zone01.gr/assets/superhero/all.json)
@@ -22,10 +18,13 @@ if [ $? -ne 0 ]; then
     exit 1
 fi
 
+# Convert JSON data to a single-line string
+json_data_single_line=$(echo "$json_data" | tr -d '\n')
+
 # Extract the family information from the connections tab for the given HERO_ID
-family_info=$(echo "$json_data" | jq -r --argjson id "$HERO_ID_INT" '
-  .[] | select(.id == $id) | .connections.relatives | @json
-' | tr -d '\n')
+family_info=$(echo "$json_data_single_line" | jq -r --argjson id "$HERO_ID_INT" '
+  .[] | select(.id == $id) | .connections.relatives
+')
 
 # Check if the HERO_ID was found and has relatives data
 if [ -z "$family_info" ]; then
@@ -33,5 +32,8 @@ if [ -z "$family_info" ]; then
     exit 1
 fi
 
-# Display the family information
-echo "$family_info"
+# Remove any leading and trailing quotes from the output
+family_info_clean=$(echo "$family_info" | sed 's/^"\(.*\)"$/\1/')
+
+# Output the data without extra quotes, preserving formatting
+printf "%s\n" "$family_info_clean"
