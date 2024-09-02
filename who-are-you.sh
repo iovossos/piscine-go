@@ -4,4 +4,4 @@ superhero_info=$(curl -s "$json_url" | jq -r '.[] | select(.id == 70) | {name: .
 
 name=$(jq -r '.name' <<< "$superhero_info")
 
-printf "%s\n" "$name"
+printf "%s" "$name"
