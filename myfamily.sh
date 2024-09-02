@@ -23,11 +23,14 @@ family_info=$(echo "$json_data" | jq -r --argjson id "$HERO_ID_INT" '
   .[] | select(.id == $id) | .connections.relatives
 ')
 
+# Remove any extra newlines or whitespace from the output
+family_info=$(echo "$family_info" | tr -d '\n' | sed 's/^[ \t]*//;s/[ \t]*$//')
+
 # Check if the HERO_ID was found and has relatives data
 if [ -z "$family_info" ]; then
     echo "Error: No data found for HERO_ID '$HERO_ID'."
     exit 1
 fi
 
-# Display the family information without extra quotes
+# Display the family information as a single line
 echo "$family_info"
