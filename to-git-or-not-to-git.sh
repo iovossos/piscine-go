@@ -1,3 +1,3 @@
-printf "Electro.\n"
-printf "67.\n"
-printf "Male.\n"
+printf "Electro\n"
+printf "67\n"
+printf "Male\n"
