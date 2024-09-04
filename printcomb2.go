@@ -11,7 +11,7 @@ func PrintComb2() {
 			printTwoDigit(i)
 			z01.PrintRune(' ')
 			printTwoDigit(j)
-			
+
 			if !(i == 98 && j == 99) {
 				z01.PrintRune(',')
 				z01.PrintRune(' ')
