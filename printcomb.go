@@ -4,7 +4,7 @@ import (
 	"github.com/01-edu/z01"
 )
 
-func printcomb() {
+func PrintComb() {
 	// Loop through all possible combinations of three different digits
 	for i := '0'; i <= '7'; i++ {
 		for j := i + 1; j <= '8'; j++ {
