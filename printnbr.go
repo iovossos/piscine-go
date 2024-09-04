@@ -17,7 +17,7 @@ func PrintNbr(n int) {
 // printNumber is a helper function that prints a non-negative integer.
 func printNumber(n int) {
 	if n >= 10 {
-		printNumber(n / 10) // Recursively print the higher digits
+		printNumber(n / 10) // Recursively process the higher digits
 	}
 	z01.PrintRune(rune('0' + n%10)) // Print the current digit
 }
