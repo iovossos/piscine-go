@@ -1,16 +1,12 @@
 package piscine
 
 func RecursiveFactorial(nb int) int {
-	if nb < 0 {
+	// Upper bound check to prevent deep recursion and overflow
+	if nb < 0 || nb > 12 { // 12! is the largest factorial that fits in a 32-bit int
 		return 0
 	}
 	if nb == 0 || nb == 1 {
 		return 1
 	}
-	// Prevent overflow for 32-bit integers by checking if multiplication would exceed the limit
-	nextFactorial := RecursiveFactorial(nb - 1)
-	if nextFactorial == 0 || nb > (1<<31-1)/nextFactorial {
-		return 0
-	}
-	return nb * nextFactorial
+	return nb * RecursiveFactorial(nb-1)
 }
