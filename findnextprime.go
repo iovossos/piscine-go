@@ -1,7 +1,7 @@
 package piscine
 
-func IsPrime(nb int) bool {
-	// Handle special cases
+// Helper function to determine if a number is prime
+func isPrimeNumber(nb int) bool {
 	if nb <= 1 {
 		return false
 	}
@@ -11,24 +11,29 @@ func IsPrime(nb int) bool {
 	if nb%2 == 0 {
 		return false // Exclude even numbers greater than 2
 	}
-
 	// Check for factors from 3 up to the square root of nb
 	for i := 3; i*i <= nb; i += 2 {
 		if nb%i == 0 {
 			return false
 		}
 	}
-
 	return true
 }
 
+// Function to find the next prime number greater than or equal to nb
 func FindNextPrime(nb int) int {
-	// Start checking from nb and keep incrementing until a prime is found
-	for nb >= 0 {
-		if IsPrime(nb) {
-			return nb
-		}
+	if nb <= 1 {
+		return 2 // The smallest prime number is 2
+	}
+	if nb == 2 {
+		return 2 // If nb is 2, it is the prime itself
+	}
+	// Start checking from nb or nb+1 if nb is even
+	if nb%2 == 0 {
 		nb++
 	}
-	return 0 // This line will never be reached because nb will always be >= 0
+	// Increment and check each odd number for primality
+	for ; !isPrimeNumber(nb); nb += 2 {
+	}
+	return nb
 }
