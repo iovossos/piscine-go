@@ -1,18 +1,20 @@
 package piscine
 
 func RecursiveFactorial(nb int) int64 {
+	return factorialHelper(nb, 1)
+}
+
+// Helper function to carry the accumulated result
+func factorialHelper(nb int, accumulator int64) int64 {
 	if nb < 0 {
 		return 0
 	}
 	if nb == 0 || nb == 1 {
-		return 1
+		return accumulator
 	}
-
-	// Prevent overflow for 64-bit integers
-	nextFactorial := RecursiveFactorial(nb - 1)
-	if nb > int((1<<63-1)/nextFactorial) {
+	// Overflow check for 64-bit integers
+	if nb > int((1<<63-1)/accumulator) {
 		return 0 // Overflow detected
 	}
-
-	return int64(nb) * nextFactorial
+	return factorialHelper(nb-1, accumulator*int64(nb))
 }
