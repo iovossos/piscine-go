@@ -1,14 +1,15 @@
 package piscine
 
 func RecursiveFactorial(nb int) int64 {
+	// Immediately return 0 for negative inputs
+	if nb < 0 {
+		return 0
+	}
 	return factorialHelper(nb, 1)
 }
 
 // Helper function to carry the accumulated result
 func factorialHelper(nb int, accumulator int64) int64 {
-	if nb < 0 {
-		return 0
-	}
 	if nb == 0 || nb == 1 {
 		return accumulator
 	}
