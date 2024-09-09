@@ -1,11 +1,12 @@
 package piscine
 
-import "fmt"
+import (
+	"github.com/01-edu/z01"
+)
 
 // Helper function to check if the current queen placement is valid
 func isValid(board []int, row, col int) bool {
 	for prevRow := 0; prevRow < row; prevRow++ {
-		// Check column and diagonals
 		if board[prevRow] == col || board[prevRow]-prevRow == col-row || board[prevRow]+prevRow == col+row {
 			return false
 		}
@@ -18,9 +19,9 @@ func solveQueens(board []int, row int) {
 	if row == len(board) {
 		// Print the solution
 		for _, col := range board {
-			fmt.Print(col + 1)
+			z01.PrintRune(rune(col + 1 + '0'))
 		}
-		fmt.Println()
+		z01.PrintRune('\n')
 		return
 	}
 
