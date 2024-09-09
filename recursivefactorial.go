@@ -1,6 +1,6 @@
 package piscine
 
-func RecursiveFactorial(nb int64) int64 {
+func RecursiveFactorial(nb int) int {
 	// Return 0 for negative numbers and numbers too large for factorial
 	if nb < 0 || nb > 20 { // 20! is the largest factorial that fits in an int64
 		return 0
@@ -9,7 +9,7 @@ func RecursiveFactorial(nb int64) int64 {
 }
 
 // Helper function to carry the accumulated result
-func factorialHelper(nb int64, accumulator int64) int64 {
+func factorialHelper(nb int, accumulator int) int {
 	if nb == 0 || nb == 1 {
 		return accumulator
 	}
