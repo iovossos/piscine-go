@@ -1,4 +1,4 @@
-package piscine 
+package piscine
 
 func BasicJoin(elems []string) string {
 	var result string
