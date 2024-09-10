@@ -8,8 +8,13 @@ func Index(s string, toFind string) int {
 	lenS := len(runesS)
 	lenToFind := len(runesToFind)
 
-	// If toFind is empty or longer than s, return -1.
-	if lenToFind == 0 || lenToFind > lenS {
+	// If toFind is empty, return 0 (empty string is considered to be found at the start).
+	if lenToFind == 0 {
+		return 0
+	}
+
+	// If toFind is longer than s, return -1.
+	if lenToFind > lenS {
 		return -1
 	}
 
