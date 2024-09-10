@@ -17,6 +17,7 @@ func Capitalize(s string) string {
 			}
 			result = append(result, ch)
 		} else {
+			result = append(result, ch)
 			if !(ch >= 'a' && ch <= 'z') && !(ch >= 'A' && ch <= 'Z') && !(ch >= '0' && ch <= '9') {
 				shouldUpper = true
 			}
