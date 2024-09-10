@@ -12,7 +12,9 @@ func TrimAtoI(s string) int {
 			foundDigit = true
 			result = result*10 + int(ch-'0')
 		}
-
-		return sign * result
 	}
+	if !foundDigit {
+		return 0
+	}
+	return sign * result
 }
