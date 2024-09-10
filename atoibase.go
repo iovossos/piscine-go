@@ -5,7 +5,7 @@ func AtoiBase(s string, base string) int {
 	const MaxInt = 9223372036854775807
 
 	// Check if the base is valid
-	if !isValidBase(base) {
+	if !isValidBase1(base) {
 		return 0
 	}
 
@@ -37,7 +37,7 @@ func AtoiBase(s string, base string) int {
 }
 
 // Helper function to check base validity
-func isValidBase(base string) bool {
+func isValidBase1(base string) bool {
 	if len(base) < 2 {
 		return false
 	}
