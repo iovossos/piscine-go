@@ -13,6 +13,13 @@ func PrintNbrBase(nbr int, base string) {
 
 	baseLen := len(base)
 
+	// Special case for the minimum int value (math.MinInt64)
+	if nbr == -9223372036854775808 {
+		z01.PrintRune('-')
+		printString(convertMinInt64(base, baseLen))
+		return
+	}
+
 	// Handle negative numbers
 	if nbr < 0 {
 		z01.PrintRune('-')
@@ -24,6 +31,7 @@ func PrintNbrBase(nbr int, base string) {
 		z01.PrintRune(rune(base[0]))
 		return
 	}
+
 	var result []rune
 	for nbr > 0 {
 		result = append([]rune{rune(base[nbr%baseLen])}, result...)
@@ -33,6 +41,19 @@ func PrintNbrBase(nbr int, base string) {
 	for _, r := range result {
 		z01.PrintRune(r)
 	}
+}
+
+// Handle the minimum value for int64
+func convertMinInt64(base string, baseLen int) string {
+	minInt := -9223372036854775808
+	var result []rune
+
+	for minInt < 0 {
+		result = append([]rune{rune(base[-(minInt % baseLen)])}, result...)
+		minInt /= baseLen
+	}
+
+	return string(result)
 }
 
 // Helper function to check base validity
