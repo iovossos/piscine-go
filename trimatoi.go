@@ -1,6 +1,6 @@
 package piscine
 
-func TrimAtoI(s string) int {
+func TrimAtoi(s string) int {
 	result := 0
 	sign := 1
 	foundDigit := false
