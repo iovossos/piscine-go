@@ -24,5 +24,4 @@ func Capitalize(s string) string {
 	}
 
 	return string(result)
-
 }
