@@ -2,7 +2,7 @@ package piscine
 
 import "github.com/01-edu/z01"
 
-func PrintNbrInOrder (n int) {
+func PrintNbrInOrder(n int) {
 	if n == 0 {
 		z01.PrintRune('0')
 		z01.PrintRune('\n')
