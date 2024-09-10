@@ -6,6 +6,5 @@ func Join(strs []string, sep string) string {
 		result += elem
 		result += sep
 	}
-	result += sep
 	return result
 }
