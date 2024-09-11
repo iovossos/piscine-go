@@ -2,10 +2,22 @@ package main
 
 import (
 	"os"
-	"piscine" // Assuming this is where your atoi function is located
 
 	"github.com/01-edu/z01"
 )
+
+// Custom atoi function to convert string to integer
+func atoi(s string) int {
+	result := 0
+	for _, char := range s {
+		if char < '0' || char > '9' {
+			// Return 0 for invalid characters (non-digit)
+			return 0
+		}
+		result = result*10 + int(char-'0')
+	}
+	return result
+}
 
 func main() {
 	// Check if the --upper flag is provided
@@ -17,8 +29,8 @@ func main() {
 
 	// Loop through each argument (excluding the program name)
 	for i := 1; i < len(os.Args); i++ {
-		// Convert the argument to an integer using the atoi function from "piscine"
-		n := piscine.Atoi(os.Args[i])
+		// Convert the argument to an integer using the custom atoi function
+		n := atoi(os.Args[i])
 		if n < 1 || n > 26 {
 			// Print a space if the argument is not valid or not in the range 1-26
 			z01.PrintRune(' ')
