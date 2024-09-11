@@ -31,15 +31,28 @@ func main() {
 		args = args[1:]
 	}
 
+	// Flag to check if any valid output was produced
+	hasOutput := false
+
 	for _, arg := range args[1:] {
 		n := 0
+		valid := true
 		for _, ch := range arg {
 			if ch < '0' || ch > '9' {
 				z01.PrintRune(' ')
-				continue
+				valid = false
+				break
 			}
 			n = n*10 + int(ch-'0')
 		}
-		printLetter(n, upper)
+		if valid {
+			printLetter(n, upper)
+			hasOutput = true
+		}
+	}
+
+	// Print a newline if any valid output was produced
+	if hasOutput {
+		z01.PrintRune('\n')
 	}
 }
