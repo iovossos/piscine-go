@@ -18,6 +18,7 @@ func printHelp() {
 	for _, ch := range helpText {
 		z01.PrintRune(ch)
 	}
+	z01.PrintRune('\n') // Print a newline after the help message
 }
 
 // Function to check if a string starts with a prefix
@@ -50,10 +51,10 @@ func printString(s string) {
 	}
 }
 
-// Function to sort a string
+// Function to sort a string in ASCII order
 func sortString(s string) string {
 	runes := []rune(s)
-	for i := 0; i < len(runes)-1; i++ {
+	for i := 0; i < len(runes); i++ {
 		for j := i + 1; j < len(runes); j++ {
 			if runes[i] > runes[j] {
 				runes[i], runes[j] = runes[j], runes[i]
@@ -68,7 +69,6 @@ func main() {
 
 	if len(args) == 0 || args[0] == "--help" || args[0] == "-h" {
 		printHelp()
-		z01.PrintRune('\n') // Print a newline after the help message
 		return
 	}
 
