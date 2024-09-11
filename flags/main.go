@@ -53,9 +53,10 @@ func main() {
 			mainString = arg
 		}
 	}
-	if !(order && insertString == "") {
+	if !order && insertString != "" {
 		mainString = mainString + insertString
 	}
+
 	if !order && insertString == "" {
 		mainString = sortStr(mainString)
 	}
