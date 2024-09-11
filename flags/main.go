@@ -94,6 +94,7 @@ func main() {
 		inputStr = string(runes)
 	}
 
+	// Append insertStr to inputStr
 	if insertStr != "" {
 		inputStr += insertStr
 	}
