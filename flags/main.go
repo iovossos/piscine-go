@@ -54,7 +54,7 @@ func printString(s string) {
 // Function to sort a string
 func sortString(s string) string {
 	runes := []rune(s)
-	for i := 0; i < len(runes); i++ {
+	for i := 0; i < len(runes)-1; i++ {
 		for j := i + 1; j < len(runes); j++ {
 			if runes[i] > runes[j] {
 				runes[i], runes[j] = runes[j], runes[i]
