@@ -27,6 +27,12 @@ func main() {
 		os.Args = os.Args[1:] // Skip the flag for further processing
 	}
 
+	// If no arguments are provided, just print a newline and exit
+	if len(os.Args) == 1 {
+		z01.PrintRune('\n')
+		return
+	}
+
 	// Loop through each argument (excluding the program name)
 	for i := 1; i < len(os.Args); i++ {
 		// Convert the argument to an integer using the custom atoi function
