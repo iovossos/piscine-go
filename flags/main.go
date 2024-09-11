@@ -11,10 +11,10 @@ import (
 func printHelp() {
 	helpText := `--insert
   -i
-         This flag inserts the string into the string passed as argument.
+	 This flag inserts the string into the string passed as argument.
 --order
   -o
-         This flag will behave like a boolean, if it is called it will order the argument.`
+	 This flag will behave like a boolean, if it is called it will order the argument.`
 
 	for _, ch := range helpText {
 		z01.PrintRune(ch)
