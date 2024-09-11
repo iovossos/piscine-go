@@ -83,7 +83,7 @@ func main() {
 
 	if order {
 		// Convert string to rune slice for sorting
-		runes := []rune(inputStr)
+		runes := []rune(inputStr + insertStr) // Combine inputStr and insertStr for sorting
 		for i := 0; i < len(runes); i++ {
 			for j := i + 1; j < len(runes); j++ {
 				if runes[i] > runes[j] {
