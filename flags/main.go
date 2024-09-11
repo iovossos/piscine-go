@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"os"
 
 	"github.com/01-edu/z01"
@@ -99,5 +98,4 @@ func main() {
 	}
 
 	printString(inputStr)
-	fmt.Println() // Print a newline at the end
 }
