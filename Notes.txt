@@ -1,0 +1,75 @@
+
+STARTING YOUR PROGRAM
+
+    Always start with package ...
+        main if it's your main program
+        or the name of the package this function belongs to
+
+    >import your libraries 
+        e.g. import (
+            "github.com/01-edu/z01"
+            )
+
+        >func main () {
+        }
+
+VARIABLES 
+
+    >declaring variables:
+        var x int 
+        var x, y int
+        x := 10 . This declaration can only be used inside a function
+    >declaring and initating variables:
+        var x int = 10
+
+    You can also use var x = 10 
+                     var y = "Ten"
+
+FUNCTIONS 
+
+    func add(x, y int) int
+    >You need to declare the variables and the function type
+    In this example x, y are both integers and the function returns an integers
+    >Use return to return a value to the main program
+    func add (x, y int) (int, int)
+    >This way we can return 2 values to the main program
+        a, b := add(x, y)
+
+Arrays/Slices
+
+    var a [10]int
+    ^declares a as an array of 10 ints 
+    primes := [6]int{2, 3, 4, 5, 10, 13}
+    var s []int = primes[1:4]
+    s[1:4] will give me the elements from index 1 to 3
+
+    Creating slices with make
+    >a := make([]int, 5)
+    Appending to a slice 
+    >a = append(a, 1)
+
+LOOPS
+
+    "for" loops have three components 
+    >init statement
+    >condition expression 
+    >post statement
+
+        e.g. for i := 0; i < 10; i++{}
+
+IF 
+
+    >if .... {}
+    >if ... {
+    } else {        
+    }
+
+DEFER
+
+    Defers are not executed if surrounding function doesn't return
+    > defer ....
+    Stacking defers, outcome is last in first out
+
+Range
+
+    
