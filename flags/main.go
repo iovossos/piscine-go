@@ -8,10 +8,10 @@ import (
 func helpPrnt() {
 	fmt.Println("--insert")
 	fmt.Println("  -i")
-	fmt.Println("\tThis flag inserts the string into the string passed as argument.")
+	fmt.Println("\t This flag inserts the string into the string passed as argument.")
 	fmt.Println("--order")
 	fmt.Println("  -o")
-	fmt.Println("\tThis flag will behave like a boolean, if it is called it will order the argument.")
+	fmt.Println("\t This flag will behave like a boolean, if it is called it will order the argument.")
 }
 
 func sortStr(s string) string {
