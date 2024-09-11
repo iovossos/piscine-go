@@ -47,7 +47,7 @@ func main() {
 			insertString = arg[3:]
 		} else if len(arg) > 9 && arg[:9] == "--insert=" {
 			insertString = arg[9:]
-		} else if arg == "-0" || arg == "--order" {
+		} else if arg == "-o" || arg == "--order" {
 			order = true
 		} else {
 			mainString = arg
