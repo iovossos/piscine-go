@@ -18,7 +18,6 @@ func printHelp() {
 	for _, ch := range helpText {
 		z01.PrintRune(ch)
 	}
-	z01.PrintRune('\n') // Print a newline after the help message
 }
 
 // Function to check if a string starts with a prefix
@@ -69,6 +68,7 @@ func main() {
 
 	if len(args) == 0 || args[0] == "--help" || args[0] == "-h" {
 		printHelp()
+		z01.PrintRune('\n') // Print a newline after the help message
 		return
 	}
 
@@ -91,6 +91,7 @@ func main() {
 
 	if inputStr == "" {
 		printHelp()
+		z01.PrintRune('\n') // Print a newline if no arguments are provided
 		return
 	}
 
