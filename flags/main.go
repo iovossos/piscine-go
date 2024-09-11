@@ -98,5 +98,5 @@ func main() {
 	}
 
 	printString(inputStr)
-	z01.PrintRune('\n') // Print a newline at the end
+	z01.PrintRune('\n') // Print a newline at the end of the output
 }
