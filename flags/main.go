@@ -51,6 +51,19 @@ func printString(s string) {
 	}
 }
 
+// Function to sort a string
+func sortString(s string) string {
+	runes := []rune(s)
+	for i := 0; i < len(runes); i++ {
+		for j := i + 1; j < len(runes); j++ {
+			if runes[i] > runes[j] {
+				runes[i], runes[j] = runes[j], runes[i]
+			}
+		}
+	}
+	return string(runes)
+}
+
 func main() {
 	args := os.Args[1:]
 
@@ -82,16 +95,8 @@ func main() {
 	}
 
 	if order {
-		// Convert string to rune slice for sorting
-		runes := []rune(inputStr)
-		for i := 0; i < len(runes); i++ {
-			for j := i + 1; j < len(runes); j++ {
-				if runes[i] > runes[j] {
-					runes[i], runes[j] = runes[j], runes[i]
-				}
-			}
-		}
-		inputStr = string(runes)
+		// Sort the inputStr
+		inputStr = sortString(inputStr)
 	}
 
 	// Append insertStr to inputStr
