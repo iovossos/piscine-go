@@ -28,7 +28,3 @@ func printTwoDigit(n int) {
 	// Print units digit
 	z01.PrintRune(rune('0' + n%10))
 }
-
-func main() {
-	PrintComb2()
-}
