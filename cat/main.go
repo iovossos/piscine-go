@@ -23,7 +23,7 @@ func printContent(reader io.Reader) {
 		}
 		if err != nil {
 			printError(err)
-			return
+			os.Exit(1)
 		}
 		for _, r := range buffer[:n] {
 			z01.PrintRune(rune(r))
@@ -45,7 +45,7 @@ func main() {
 		file, err := os.Open(fileName)
 		if err != nil {
 			printError(err)
-			continue
+			os.Exit(1) // Exit with status 1 if any file cannot be opened
 		}
 		printContent(file)
 		file.Close()
