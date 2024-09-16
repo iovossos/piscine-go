@@ -6,8 +6,10 @@ import (
 	"github.com/01-edu/z01"
 )
 
-const EvenMsg = "I have an even number of arguments"
-const OddMsg = "I have an odd number of arguments"
+const (
+	EvenMsg = "I have an even number of arguments"
+	OddMsg  = "I have an odd number of arguments"
+)
 
 func printStr(s string) {
 	for _, r := range s {
