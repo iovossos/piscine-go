@@ -93,7 +93,7 @@ func main() {
 			continue
 		}
 
-		// Print the filename header between files only if the previous file was processed successfully
+		// Print the filename header between files, or if the previous file had an error
 		if i < len(args)-1 {
 			fmt.Printf("\n==> %s <==\n", args[i+1])
 		}
