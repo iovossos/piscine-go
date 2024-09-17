@@ -5,9 +5,9 @@ import (
 	"os"
 )
 
-func printError(err error) {
-	// Print error message using fmt.Printf, as specified
-	fmt.Printf("%s\n", err.Error())
+func printError(fileName string, err error) {
+	// Print error message with the filename
+	fmt.Printf("open %s: %s\n", fileName, err.Error())
 }
 
 func stringToInt(s string) (int, error) {
@@ -24,7 +24,7 @@ func stringToInt(s string) (int, error) {
 func tailFile(fileName string, count int) bool {
 	file, err := os.Open(fileName)
 	if err != nil {
-		printError(err)
+		printError(fileName, err)
 		return false
 	}
 	defer file.Close()
@@ -32,7 +32,7 @@ func tailFile(fileName string, count int) bool {
 	// Get the file size
 	fileInfo, err := file.Stat()
 	if err != nil {
-		printError(err)
+		printError(fileName, err)
 		return false
 	}
 
@@ -46,7 +46,7 @@ func tailFile(fileName string, count int) bool {
 	// Move the file pointer to the start of the last `count` characters
 	_, err = file.Seek(offset, 0)
 	if err != nil {
-		printError(err)
+		printError(fileName, err)
 		return false
 	}
 
@@ -54,7 +54,7 @@ func tailFile(fileName string, count int) bool {
 	buffer := make([]byte, count)
 	n, err := file.Read(buffer)
 	if err != nil {
-		printError(err)
+		printError(fileName, err)
 		return false
 	}
 
@@ -88,13 +88,14 @@ func main() {
 	// Process each file
 	exitStatus := 0
 	for i := 2; i < len(args); i++ {
-		// If processing multiple files, print the header for the next file
-		if i > 2 {
-			fmt.Printf("\n==> %s <==\n", args[i])
-		}
-
 		if !tailFile(args[i], count) {
 			exitStatus = 1
+			continue
+		}
+
+		// Print the filename header for the next file only if the current file is processed successfully
+		if i < len(args)-1 {
+			fmt.Printf("\n==> %s <==\n", args[i+1])
 		}
 	}
 
