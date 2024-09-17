@@ -54,7 +54,8 @@ func tailFile(fileName string, count int) (bool, error) {
 		return false, err
 	}
 
-	// Return the content as a string
+	// Use the `n` variable to ensure it is used
+	fmt.Printf("%s", string(buffer[:n]))
 	return true, nil
 }
 
@@ -89,9 +90,7 @@ func main() {
 			exitStatus = 1
 		} else {
 			// Print the filename header before the content
-			fmt.Printf("==> %s <==\n", args[i])
-			// Tail the file content
-			tailFile(args[i], count)
+			fmt.Printf("\n==> %s <==\n", args[i])
 		}
 	}
 
