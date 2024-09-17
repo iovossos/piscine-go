@@ -3,12 +3,22 @@ package main
 import (
 	"fmt"
 	"os"
-	"strconv"
 )
 
 func printError(err error) {
 	// Print error message using fmt.Printf, as specified
 	fmt.Printf("%s\n", err.Error())
+}
+
+func stringToInt(s string) (int, error) {
+	result := 0
+	for _, char := range s {
+		if char < '0' || char > '9' {
+			return 0, fmt.Errorf("Invalid number: %s", s)
+		}
+		result = result*10 + int(char-'0')
+	}
+	return result, nil
 }
 
 func tailFile(fileName string, count int) {
@@ -68,7 +78,7 @@ func main() {
 	}
 
 	// Get the number of characters to display
-	count, err := strconv.Atoi(args[1])
+	count, err := stringToInt(args[1])
 	if err != nil || count < 0 {
 		fmt.Printf("Invalid number of characters: %s\n", args[1])
 		os.Exit(1)
