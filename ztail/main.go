@@ -6,7 +6,7 @@ import (
 )
 
 func printError(fileName string, err error) {
-	// Print a clean error message
+	// Print a clean error message without duplication
 	fmt.Printf("open %s: %s\n", fileName, err.Error())
 }
 
@@ -54,7 +54,7 @@ func tailFile(fileName string, count int) (bool, error) {
 		return false, err
 	}
 
-	// Use the `n` variable to ensure it is used
+	// Print the content of the file
 	fmt.Printf("%s", string(buffer[:n]))
 	return true, nil
 }
