@@ -6,7 +6,7 @@ import (
 )
 
 func printError(fileName string, err error) {
-	// Print error message with the filename
+	// Print a clean error message for missing files
 	fmt.Printf("open %s: %s\n", fileName, err.Error())
 }
 
@@ -58,7 +58,7 @@ func tailFile(fileName string, count int) bool {
 		return false
 	}
 
-	// Print the content using fmt.Printf
+	// Print the content
 	fmt.Printf("%s", string(buffer[:n]))
 	return true
 }
@@ -67,7 +67,7 @@ func main() {
 	args := os.Args[1:]
 
 	// Check if there are enough arguments
-	if len(args) < 2 {
+	if len(args) < 3 {
 		fmt.Printf("Usage: go run . -c <number> <file1> <file2> ...\n")
 		os.Exit(1)
 	}
@@ -87,15 +87,20 @@ func main() {
 
 	// Process each file
 	exitStatus := 0
+	firstFileProcessed := false
 	for i := 2; i < len(args); i++ {
 		if !tailFile(args[i], count) {
+			// Mark exit status if there was an error
 			exitStatus = 1
 			continue
 		}
 
-		// Print the filename header for the next file only if the current file is processed successfully
-		if i < len(args)-1 {
-			fmt.Printf("\n==> %s <==\n", args[i+1])
+		// Print the filename header for valid files
+		if firstFileProcessed {
+			fmt.Printf("\n==> %s <==\n", args[i])
+		} else {
+			fmt.Printf("==> %s <==\n", args[i])
+			firstFileProcessed = true
 		}
 	}
 
