@@ -90,12 +90,11 @@ func main() {
 	for i := 2; i < len(args); i++ {
 		if !tailFile(args[i], count) {
 			exitStatus = 1
-			continue
-		}
-
-		// Print the filename header between files, or if the previous file had an error
-		if i < len(args)-1 {
-			fmt.Printf("\n==> %s <==\n", args[i+1])
+		} else {
+			// If processing multiple files, print the header for the next file
+			if i < len(args)-1 {
+				fmt.Printf("\n==> %s <==\n", args[i+1])
+			}
 		}
 	}
 
