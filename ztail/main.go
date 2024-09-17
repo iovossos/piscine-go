@@ -47,14 +47,14 @@ func tailFile(fileName string, count int) (bool, error) {
 		return false, err
 	}
 
-	// Read the last `count` characters and print them
+	// Read the last `count` characters
 	buffer := make([]byte, count)
 	n, err := file.Read(buffer)
 	if err != nil {
 		return false, err
 	}
 
-	// Print the content
+	// Return the content as a string
 	fmt.Printf("%s", string(buffer[:n]))
 	return true, nil
 }
