@@ -88,13 +88,13 @@ func main() {
 	// Process each file
 	exitStatus := 0
 	for i := 2; i < len(args); i++ {
+		// If processing multiple files, print the header for the next file
+		if i > 2 {
+			fmt.Printf("\n==> %s <==\n", args[i])
+		}
+
 		if !tailFile(args[i], count) {
 			exitStatus = 1
-		} else {
-			// If processing multiple files, print the header for the next file
-			if i < len(args)-1 {
-				fmt.Printf("\n==> %s <==\n", args[i+1])
-			}
 		}
 	}
 
