@@ -5,103 +5,59 @@ import (
 	"os"
 )
 
-func printError(fileName string, err error) {
-	// Print a clean error message without duplication
-	fmt.Printf("open %s: %s\n", fileName, err.Error())
-}
-
-func stringToInt(s string) (int, error) {
-	result := 0
-	for _, char := range s {
-		if char < '0' || char > '9' {
-			return 0, fmt.Errorf("Invalid number: %s", s)
-		}
-		result = result*10 + int(char-'0')
+func checkFile(e error, name string) bool {
+	if e != nil { //check if there is an error opening file
+		fmt.Printf("open %s: no such file or directory\n", name)
+		return false
 	}
-	return result, nil
-}
-
-func tailFile(fileName string, count int) error {
-	file, err := os.Open(fileName)
-	if err != nil {
-		return err
-	}
-	defer file.Close()
-
-	// Get the file size
-	fileInfo, err := file.Stat()
-	if err != nil {
-		return err
-	}
-
-	// Calculate where to start reading
-	size := fileInfo.Size()
-	offset := size - int64(count)
-	if offset < 0 {
-		offset = 0
-	}
-
-	// Move the file pointer to the start of the last `count` characters
-	_, err = file.Seek(offset, 0)
-	if err != nil {
-		return err
-	}
-
-	// Read the last `count` characters
-	buffer := make([]byte, count)
-	n, err := file.Read(buffer)
-	if err != nil {
-		return err
-	}
-
-	// Print the content of the file
-	fmt.Printf("%s", string(buffer[:n]))
-	return nil
+	return true //continue if no error
 }
 
 func main() {
-	args := os.Args[1:]
-
-	// Check if there are enough arguments
-	if len(args) < 3 {
-		fmt.Printf("Usage: go run . -c <number> <file1> <file2> ...\n")
-		os.Exit(1)
+	if len(os.Args) < 4 { //check if there are correct amount of arguments
+		fmt.Println()
+		os.Exit(1) //end program
 	}
 
-	// Parse the -c option
-	if args[0] != "-c" {
-		fmt.Printf("Invalid option. Only '-c' is allowed.\n")
-		os.Exit(1)
+	numStr := os.Args[2] //store the index number
+	num := 0
+	for _, r := range numStr { //convert the string to an int and store in num
+		num = num*10 + int(r-'0')
 	}
 
-	// Get the number of characters to display
-	count, err := stringToInt(args[1])
-	if err != nil || count < 0 {
-		fmt.Printf("Invalid number of characters: %s\n", args[1])
-		os.Exit(1)
-	}
+	errExit := false
+	firstFile := true
+	prevHadError := false
 
-	// Process each file
-	exitStatus := 0
-	for i := 2; i < len(args); i++ {
-		// Try to tail the file
-		err := tailFile(args[i], count)
-		if err != nil {
-			// Print error if file cannot be processed
-			printError(args[i], err)
-			exitStatus = 1
-		} else {
-			// Print the filename header for valid files before content
-			if i != 2 {
-				fmt.Printf("\n==> %s <==\n", args[i])
-			} else {
-				fmt.Printf("==> %s <==\n", args[i])
+	for _, f := range os.Args[3:] { //loop through given files
+		file, err := os.Open(f) //open file with error handling
+		if checkFile(err, f) {  //check error and continue if it is valid
+			if !firstFile { //check if it is the first file
+				if prevHadError { //check if the previous file had an error
+					fmt.Printf("\n")
+				} else {
+					fmt.Printf("\n")
+				}
 			}
+			fmt.Printf("==> %s <==\n", f)
+
+			data, _ := os.ReadFile(f) //store data of the opened file
+			start := len(data) - num  //get the starting index of where we want to read the file
+			if start < 0 {            //check if start is negative, if it is just set the starting index to 0
+				start = 0
+			}
+			fmt.Printf("%s", data[start:]) //print the data from the starting index till the end
+
+			file.Close()         //close file once we are done
+			prevHadError = false //no error, so we set this to false
+		} else { // error has been found
+			errExit = true      //bool to let us know there was an error
+			prevHadError = true // let us know the previous file had an error for the next pass
 		}
+		firstFile = false //first file got tried so now we set the variable to false
 	}
 
-	// Exit with the appropriate status
-	if exitStatus != 0 {
+	if errExit { // check if there was an error during opening files
 		os.Exit(1)
 	}
 }
