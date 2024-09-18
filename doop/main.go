@@ -1,7 +1,6 @@
 package main
 
 import (
-	"math"
 	"os"
 )
 
@@ -26,11 +25,6 @@ func atoi(s string) (int64, bool) {
 			return 0, false
 		}
 		result = result*10 + int64(s[i]-'0')
-
-		// Check for overflow
-		if result > math.MaxInt64 {
-			return 0, false
-		}
 	}
 
 	return result * sign, true
@@ -54,21 +48,21 @@ func main() {
 	switch operator {
 	case "+":
 		// Check for overflow
-		if (b > 0 && a > math.MaxInt64-b) || (b < 0 && a < math.MinInt64-b) {
+		if (b > 0 && a > 9223372036854775807-b) || (b < 0 && a < -9223372036854775808-b) {
 			return
 		}
 		printNbr(a + b)
 
 	case "-":
 		// Check for overflow
-		if (b < 0 && a > math.MaxInt64+b) || (b > 0 && a < math.MinInt64+b) {
+		if (b < 0 && a > 9223372036854775807+b) || (b > 0 && a < -9223372036854775808+b) {
 			return
 		}
 		printNbr(a - b)
 
 	case "*":
 		// Check for overflow
-		if a != 0 && b != 0 && (a > math.MaxInt64/b || a < math.MinInt64/b) {
+		if a != 0 && (a > 9223372036854775807/b || a < -9223372036854775808/b) {
 			return
 		}
 		printNbr(a * b)
