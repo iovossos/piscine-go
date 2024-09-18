@@ -77,7 +77,7 @@ func main() {
 
 func printNbr(n int) {
 	if n == 0 {
-		os.Stdout.Write([]byte("0"))
+		os.Stdout.Write([]byte("0\n"))
 		return
 	}
 
