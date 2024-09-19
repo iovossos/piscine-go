@@ -4,7 +4,7 @@ import (
 	"github.com/01-edu/z01"
 )
 
-func PrintComb() {
+func DescendComb() {
 	for i := 99; i >= 10; i-- {
 		for j := i - 1; j >= 10; j-- {
 			printTwoDigits(i)
