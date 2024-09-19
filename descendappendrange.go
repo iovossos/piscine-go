@@ -1,6 +1,6 @@
 package piscine
 
-func DescendAppendRange(max, in int) []int {
+func DescendAppendRange(max, min int) []int {
 	if max >= min {
 		return nil // Return nil slice if min is greater than or equal to max
 	}
