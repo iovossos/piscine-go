@@ -1,9 +1,9 @@
 package piscine
 
 func StringToIntSlice(str string) []int {
-	pinakas := make([]int, len(str))
-	for i, char := range str {
-		pinakas[i] = int(char)
+	var intSlice []int
+	for _, char := range str {
+		intSlice = append(intSlice, int(char)) // Append each rune's integer value
 	}
-	return pinakas
+	return intSlice
 }
