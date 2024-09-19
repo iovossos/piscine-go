@@ -1,7 +1,7 @@
 package piscine
 
 func DescendAppendRange(max, min int) []int {
-	if max >= min {
+	if max <= min {
 		return nil // Return nil slice if min is greater than or equal to max
 	}
 
@@ -9,7 +9,7 @@ func DescendAppendRange(max, min int) []int {
 	var result []int
 
 	// Append values from min to max - 1
-	for i := max; i > min; i++ {
+	for i := max; i > min; i-- {
 		result = append(result, i)
 	}
 
