@@ -5,12 +5,12 @@ import (
 )
 
 func DescendComb() {
-	for i := 99; i >= 10; i-- {
-		for j := i - 1; j >= 10; j-- {
+	for i := 99; i >= 0; i-- {
+		for j := i - 1; j >= 0; j-- {
 			printTwoDigits(i)
 			z01.PrintRune(' ')
 			printTwoDigits(j)
-			if !(i == 11 && j == 10) {
+			if i != 1 || j != 0 {
 				z01.PrintRune(',')
 				z01.PrintRune(' ')
 			}
@@ -20,6 +20,15 @@ func DescendComb() {
 }
 
 func printTwoDigits(n int) {
-	z01.PrintRune(rune(n/10 + '0'))
+	if n < 10 {
+		z01.PrintRune('0')
+	}
+	printNumber(n)
+}
+
+func printNumber(n int) {
+	if n >= 10 {
+		z01.PrintRune(rune(n/10 + '0'))
+	}
 	z01.PrintRune(rune(n%10 + '0'))
 }
