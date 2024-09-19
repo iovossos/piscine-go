@@ -8,7 +8,7 @@ func DescendComb() {
 			printTwoDigits(i)
 			z01.PrintRune(' ')
 			printTwoDigits(j)
-			if !(i == 1 && j == 0) { // To avoid the trailing comma and space
+			if !(i == 1 && j == 0) {
 				z01.PrintRune(',')
 				z01.PrintRune(' ')
 			}
@@ -17,8 +17,6 @@ func DescendComb() {
 }
 
 func printTwoDigits(n int) {
-	// Print the first digit (tens place)
 	z01.PrintRune(rune(n/10 + '0'))
-	// Print the second digit (ones place)
 	z01.PrintRune(rune(n%10 + '0'))
 }
