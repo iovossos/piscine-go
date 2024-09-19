@@ -14,7 +14,6 @@ func DescendComb() {
 			}
 		}
 	}
-	z01.PrintRune('\n')
 }
 
 func printTwoDigits(n int) {
