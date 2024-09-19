@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"os"
 )
 
@@ -9,7 +10,7 @@ func main() {
 	for _, arg := range os.Args[1:] {
 		for _, keyword := range keywords {
 			if arg == keyword {
-				println("Alert!!!")
+				fmt.Println("Alert!!!")
 				return
 			}
 		}
