@@ -1,36 +1,41 @@
 package piscine
 
 func LoafOfBread(str string) string {
-	var result string
-	var count int // To count non-space characters
-
-	for i := 0; i < len(str); i++ {
-		if str[i] == ' ' {
-			result += " " // Add spaces to the result but don't count them
-			continue
-		}
-
-		if count < 5 {
-			result += string(str[i]) // Add non-space characters to the result
-			count++
-		} else if count == 5 {
-			// Skip the 6th non-space character and reset the count
-			count = 0
-			continue
-		}
+	// If the string is empty, return just a newline
+	if len(str) == 0 {
+		return "\n"
 	}
 
-	// If there are fewer than 5 non-space characters, return "Invalid Output\n"
-	nonSpaceCount := 0
-	for i := 0; i < len(result); i++ {
-		if result[i] != ' ' {
-			nonSpaceCount++
-		}
-	}
-
-	if nonSpaceCount < 5 {
+	// If the string has less than 5 characters, return "Invalid Output\n"
+	if len(str) < 5 {
 		return "Invalid Output\n"
 	}
 
+	var result string
+	count := 0
+
+	for i := 0; i < len(str); i++ {
+		if count == 5 {
+			// Skip the 6th character and reset the count
+			i++
+			count = 0
+			// Only add a space if there are more characters left and they are not spaces
+			for i < len(str) && str[i] == ' ' {
+				i++ // Skip any extra spaces
+			}
+			if i < len(str) { // Add space only if there are more valid characters left
+				result += " "
+			}
+			if i >= len(str) {
+				break
+			}
+		}
+		if i < len(str) && str[i] != ' ' { // Ignore spaces in the string
+			result += string(str[i])
+			count++
+		}
+	}
+
+	// Append newline character at the end without trailing spaces
 	return result + "\n"
 }
