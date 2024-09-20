@@ -30,7 +30,7 @@ func CloseDoor(ptrDoor *Door) bool {
 
 // OpenDoor sets the door's state to open
 func OpenDoor(ptrDoor *Door) bool {
-	PrintStr("Door Opening... ")
+	PrintStr("Door Opening...")
 	ptrDoor.state = OPEN
 	return true
 }
