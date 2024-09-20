@@ -2,32 +2,28 @@ package piscine
 
 func LoafOfBread(str string) string {
 	var result string
-	var wordCount int // To count characters excluding the skipped ones
-	var charCount int // To count all characters, including spaces
+	var count int // To count non-space characters
 
 	for i := 0; i < len(str); i++ {
-		if str[i] == ' ' { // Include spaces in the result
-			result += " "
+		if str[i] == ' ' {
+			result += " " // Add space to the result
 			continue
 		}
 
-		if wordCount < 5 {
-			result += string(str[i]) // Add characters to the result until 5 chars are collected
-			wordCount++
-		} else if wordCount == 5 {
-			// Skip the 6th character and reset the word count
-			wordCount = 0
+		if count < 5 {
+			result += string(str[i]) // Add characters to the result until 5 non-space chars are collected
+			count++
+		} else if count == 5 {
+			// Skip the 6th character (reset count) but do not add it to the result
+			count = 0
 			continue
 		}
-
-		charCount++
 	}
 
-	// If the string has less than 5 characters, return "Invalid Output\n"
-	if charCount < 5 {
+	// If the string has less than 5 non-space characters, return "Invalid Output\n"
+	if len(result) < 5 {
 		return "Invalid Output\n"
 	}
 
-	// Return the formatted result with a newline at the end
 	return result + "\n"
 }
