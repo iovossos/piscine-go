@@ -1,63 +1,45 @@
 package main
 
-import "github.com/01-edu/z01"
+import "fmt"
 
-// Define constants for door states
-const (
-	OPEN  = true
-	CLOSE = false
-)
-
-// Define a Door struct
 type Door struct {
 	state bool
 }
 
-// PrintStr prints a string rune by rune
-func PrintStr(s string) {
-	for _, r := range s {
-		z01.PrintRune(r)
-	}
-	z01.PrintRune('\n')
-}
+const OPEN = false
+const CLOSE = true
 
-// CloseDoor sets the door's state to closed
-func CloseDoor(ptrDoor *Door) bool {
-	PrintStr("Door Closing...")
-	ptrDoor.state = CLOSE
-	return true
-}
-
-// OpenDoor sets the door's state to open
-func OpenDoor(ptrDoor *Door) bool {
-	PrintStr("Door Opening...")
+func OpenDoor(ptrDoor *Door) {
+	fmt.Println("Door Opening...")
 	ptrDoor.state = OPEN
-	return true
 }
 
-// IsDoorOpen checks if the door is open
-func IsDoorOpen(door *Door) bool {
-	PrintStr("Is the Door opened ?")
-	return door.state == OPEN
+func CloseDoor(ptrDoor *Door) {
+	fmt.Println("Door closing...")
+	ptrDoor.state = CLOSE
 }
 
-// IsDoorClose checks if the door is closed
-func IsDoorClose(ptrDoor *Door) bool {
-	PrintStr("Is the Door closed ?")
-	return ptrDoor.state == CLOSE
+func IsDoorOpen(ptrDoor Door) bool {
+	fmt.Println("Door is open ?")
+	return ptrDoor.state
+}
+
+func IsDoorClose(ptrDoor Door) bool {
+	fmt.Println("Door is close ?")
+	return ptrDoor.state
 }
 
 func main() {
-	door := &Door{}
+	door := Door{}
 
-	OpenDoor(door)
+	OpenDoor(&door)
 	if IsDoorClose(door) {
-		OpenDoor(door)
+		OpenDoor(&door)
 	}
 	if IsDoorOpen(door) {
-		CloseDoor(door)
+		CloseDoor(&door)
 	}
 	if door.state == OPEN {
-		CloseDoor(door)
+		CloseDoor(&door)
 	}
 }
