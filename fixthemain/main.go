@@ -6,8 +6,10 @@ type Door struct {
 	state bool
 }
 
-const OPEN = false
-const CLOSE = true
+const (
+	OPEN  = false
+	CLOSE = true
+)
 
 func OpenDoor(ptrDoor *Door) {
 	fmt.Println("Door Opening...")
