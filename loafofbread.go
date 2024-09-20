@@ -6,7 +6,7 @@ func LoafOfBread(str string) string {
 
 	for i := 0; i < len(str); i++ {
 		if str[i] == ' ' {
-			result += " " // Add space to the result but don't count it
+			result += " " // Add space directly to the result
 			continue
 		}
 
@@ -14,14 +14,14 @@ func LoafOfBread(str string) string {
 			result += string(str[i]) // Add non-space characters to the result
 			count++
 		} else if count == 5 {
-			// Skip the 6th character (i.e., reset count) and do not add it to the result
+			// Skip the 6th character and reset count
 			count = 0
 			continue
 		}
 	}
 
-	// If there are less than 5 non-space characters, return "Invalid Output\n"
-	if count < 5 && len(result) == 0 {
+	// If the total number of non-space characters is less than 5, return "Invalid Output\n"
+	if count > 0 && count < 5 {
 		return "Invalid Output\n"
 	}
 
