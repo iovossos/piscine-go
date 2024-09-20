@@ -23,7 +23,7 @@ func PrintStr(s string) {
 
 // CloseDoor sets the door's state to closed
 func CloseDoor(ptrDoor *Door) bool {
-	PrintStr("Door Closing... ")
+	PrintStr("Door Closing...")
 	ptrDoor.state = CLOSE
 	return true
 }
