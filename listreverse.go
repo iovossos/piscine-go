@@ -8,18 +8,11 @@ func ListReverse(l *List) {
 
 	for current != nil {
 		next = current.Next
-		current := l.Head
-		var next *NodeL
-
-		for current != nil {
-			next = current.Next
-			current.Next = prev
-			prev = current
-			current = Next
-
-		}
-
-		l.Tail = l.Head
-		l.Head = prev
+		current.Next = prev
+		prev = current
+		current = next
 	}
+
+	l.Tail = l.Head
+	l.Head = prev
 }
