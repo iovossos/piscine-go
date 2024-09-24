@@ -1,3 +1,4 @@
+// Write a function ListPushBack that inserts a new element NodeL at the end of the list l while using the structure List.
 package piscine
 
 type NodeL struct {

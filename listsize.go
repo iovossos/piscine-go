@@ -1,3 +1,4 @@
+// Write a function ListSize that returns the number of elements in a linked list l.
 package piscine
 
 func ListSize(l *List) int {

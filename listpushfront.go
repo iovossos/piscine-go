@@ -1,3 +1,4 @@
+// Write a function ListPushFront that inserts a new element NodeL at the beginning of the list l while using the structure List
 package piscine
 
 func ListPushFront(l *List, data interface{}) {
